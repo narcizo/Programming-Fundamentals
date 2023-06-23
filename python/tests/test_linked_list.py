@@ -49,6 +49,75 @@ def test_append_element():
                                       else el 
                                       for el in list])
     
+def test_add_first_node():
+    llist = linked_lists.LinkedList(['a', 'b'])
+    
+    llist.add_first('z')
+    
+    assert str(llist) == 'z -> a -> b -> None'
+    
+def test_add_last_empty_list():
+    llist = linked_lists.LinkedList()
+    
+    llist.add_last('z')
+    
+    assert str(llist) == 'z -> None' 
+    
+def test_add_last():
+    llist = linked_lists.LinkedList(['a', 'b'])
+    
+    llist.add_last('z')
+    
+    assert str(llist) == 'a -> b -> z -> None'
+    
+def test_add_after_empty_list():
+    llist = linked_lists.LinkedList()
+    
+    with pytest.raises(Exception):
+        llist.add_after('a', 'b')
+    
+    assert llist is not None
+    assert llist.head is None
+    
+def test_add_after():
+    llist = linked_lists.LinkedList(['a', 'b'])
+    
+    llist.add_after('a', 'z')
+    
+    assert str(llist) == 'a -> z -> b -> None'
+    
+def test_add_after_not_found():
+    llist = linked_lists.LinkedList(['a', 'b'])
+    
+    with pytest.raises(Exception):
+        llist.add_after('c', 'z')
+
+    assert str(llist) == 'a -> b -> None'
+    
+def test_add_before_empty_list():
+    llist = linked_lists.LinkedList()
+    
+    with pytest.raises(Exception):
+        llist.add_before('a', 'b')
+        
+    assert llist is not None
+    assert llist.head is None
+    
+def test_add_before():
+    llist = linked_lists.LinkedList(['a', 'b'])
+    
+    llist.add_before('b', 'z')
+    
+    assert str(llist) == 'a -> z -> b -> None'
+    
+def test_add_before_not_found():
+    llist = linked_lists.LinkedList(['a', 'b'])
+
+    with pytest.raises(Exception):
+        llist.add_before('z', 'x')
+    
+    assert str(llist) == 'a -> b -> None'
+
 def test_append_element_empty_list():
     llist = linked_lists.LinkedList()
     

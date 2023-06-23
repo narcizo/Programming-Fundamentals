@@ -23,20 +23,57 @@ class LinkedList:
         return current_node.next     
     
     def add_first(self, data):
-        #TODO add node in the beggining of the list
-        ...
+        node = Node(data)
+        node.next = self.head
+        self.head = node
+        
+        return node
         
     def add_last(self, data):
-        #TODO add node in the end of the list
-        ...
+        if self.head is None:
+            self.head = Node(data)
+            return
         
-    def add_after(self, target_node, data):
-        #TODO add node after target node
-        ...
+        for current_node in self:
+            pass
+        
+        current_node.next = Node(data)
+        
+        return current_node.next
+        
+    def add_after(self, target_node_data, data):
+        nodes = self.find_node(target_node_data)
+        
+        new_node = Node(data)
+        
+        next_node = nodes['node'].next
+        new_node.next = next_node
+        nodes['node'].next = new_node
+        
+        return new_node
     
-    def add_before(self, target_node, data):
-        #TODO add node before target node
-        ...
+    def add_before(self, target_node_data, data):
+        nodes = self.find_node(target_node_data)
+
+        new_node = Node(data)
+        new_node.next = nodes['node']
+        nodes['previousNode'].next = new_node
+        
+        return new_node
+
+    def find_node(self, target_node_data):
+        if self.head is None:
+            raise Exception('Cannot find element because the list is empty.')
+
+        previous_node = self.head
+        for node in self:
+            if node.data == target_node_data:
+                return {
+                    'previousNode': previous_node,
+                    'node': node,
+                }
+                
+        raise Exception('Cannot find element because the list is empty.')
         
     def remove(self, target_node_data):
         #TODO removes first, middle or last nodes
@@ -106,10 +143,13 @@ def main():
     
     llist.append('z')
     
+    llist.add_after('a', 'z')
     print(llist)
     
-    llist2 = LinkedList()
-    llist2.pops()
+    # llist2 = LinkedList()
+    # llist2.pops()
+    
+    # llist2.add_before('a', 'z')
     
 if __name__ == "__main__":
     main()
