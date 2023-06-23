@@ -61,23 +61,25 @@ class LinkedList:
         
         return new_node
 
-    def find_node(self, target_node_data):
-        if self.head is None:
-            raise Exception('Cannot find element because the list is empty.')
-
-        previous_node = self.head
-        for node in self:
-            if node.data == target_node_data:
-                return {
-                    'previousNode': previous_node,
-                    'node': node,
-                }
-                
-        raise Exception('Cannot find element because the list is empty.')
-        
     def remove(self, target_node_data):
-        #TODO removes first, middle or last nodes
-        ...       
+        nodes = self.find_node(target_node_data)
+        
+        node = nodes['node']
+        previous_node = nodes['previousNode']
+                
+        if previous_node is None:
+            self.head = node.next
+            node.next = None
+            
+        elif node.next is None:
+            previous_node.next = None
+        
+        else:
+            previous_node.next = node.next
+            node.next = None
+                
+        return node
+            
                 
     def pops(self):
         if self.head is None:
@@ -94,6 +96,21 @@ class LinkedList:
         last_node.next = None
         
         return node
+
+    def find_node(self, target_node_data):
+        if self.head is None:
+            raise Exception('Cannot find element because the list is empty.')
+
+        previous_node = None
+        for node in self:
+            if node.data == target_node_data:
+                return {
+                    'previousNode': previous_node,
+                    'node': node,
+                }
+            previous_node = node
+                
+        raise Exception('Cannot find element because the list is empty.')
         
     def __iter__(self):
         node = self.head
@@ -129,27 +146,10 @@ class Node:
     
 def main():
     llist = LinkedList(['a', 'b', 'c', 'd', 'e', 'f'])
-    print(llist)
     
-    llist.append('z')
-    
-    print(llist)
-    
-    print(llist.head)
-    
-    llist.pops()
+    llist.remove('f')
     
     print(llist)
-    
-    llist.append('z')
-    
-    llist.add_after('a', 'z')
-    print(llist)
-    
-    # llist2 = LinkedList()
-    # llist2.pops()
-    
-    # llist2.add_before('a', 'z')
     
 if __name__ == "__main__":
     main()

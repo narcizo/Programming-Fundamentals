@@ -152,3 +152,43 @@ def test_pop_element_empty_list():
     assert llist is not None
     assert llist.head is None
     
+def test_remove_element_empty_list():
+    llist = linked_lists.LinkedList()
+    
+    with pytest.raises(Exception):
+        llist.remove('a')
+        
+    assert llist is not None
+    assert llist.head is None
+    
+def test_remove_single_element_in_list():
+    llist = linked_lists.LinkedList(['a'])
+    
+    llist.remove('a')
+    
+    assert type(llist) is linked_lists.LinkedList
+    assert llist is not None
+    assert llist.head is None
+    
+def test_remove_first_element_list():
+    llist = linked_lists.LinkedList(['a', 'b', 'c'])
+    
+    llist.remove('a')
+    
+    assert str(llist) == 'b -> c -> None'
+    
+def test_remove_last_element_list():
+    llist = linked_lists.LinkedList(['a', 'b', 'c', 'd', 'e'])
+    
+    llist.remove('e')
+    
+    assert str(llist) == 'a -> b -> c -> d -> None'
+    
+def test_remove_element_list():
+    llist = linked_lists.LinkedList()
+    
+    llist = linked_lists.LinkedList(['a', 'b', 'c', 'd', 'e'])
+    
+    llist.remove('c')
+    
+    assert str(llist) == 'a -> b -> d -> e -> None'
