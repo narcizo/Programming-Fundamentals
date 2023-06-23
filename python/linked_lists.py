@@ -98,16 +98,20 @@ class LinkedList:
         return node
 
     def find_node(self, target_node_data):
+        #TODO transform return dictionary in Object
         if self.head is None:
             raise Exception('Cannot find element because the list is empty.')
 
+        index = 0
         previous_node = None
         for node in self:
             if node.data == target_node_data:
                 return {
                     'previousNode': previous_node,
                     'node': node,
+                    'index': index
                 }
+            index += 1
             previous_node = node
                 
         raise Exception('Cannot find element because the list is empty.')

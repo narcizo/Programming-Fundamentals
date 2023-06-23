@@ -192,3 +192,14 @@ def test_remove_element_list():
     llist.remove('c')
     
     assert str(llist) == 'a -> b -> d -> e -> None'
+    
+def test_find_element_list():
+    llist = linked_lists.LinkedList()
+    
+    llist = linked_lists.LinkedList(['a', 'b', 'c', 'd', 'e'])
+    
+    node = llist.find_node('c')
+    
+    assert node['index'] == 2
+    # TODO finish tests on indexing
+    # assert node['node'] == {'node': 2, 'previousNode': 'b'}
