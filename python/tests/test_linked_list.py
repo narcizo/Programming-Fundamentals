@@ -1,7 +1,8 @@
 import pytest
 import sys
 
-sys.path.insert(1, '/home/narcizo/Projects/Programming-Fundamentals/python')
+# sys.path.insert(1, '/home/narcizo/Projects/Programming-Fundamentals/python')
+sys.path.insert(1, r"C:\Users\narci\Documents\Projects\Programming-Fundamentals\python")
 
 import linked_lists
 
